@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+{% block title %}Rail Fence Cipher — Cipher Lab{% endblock %}
+
+{% block content %}
+  <div class="eyebrow">Tool 01</div>
+  <h1 class="page-title">Rail Fence Cipher</h1>
+  <p class="page-sub">A transposition cipher: the text is written in a zig-zag across a set number of rails, then read off row by row. Choose the number of rails (the key) and whether to encrypt or decrypt.</p>
+
+  <div class="card">
+    <h2>Run the cipher</h2>
+    <div class="card-note">To decrypt, just use the same key you picked for encryption. If you forget it, the message stays scrambled!</div>
+
+    <form method="post">
+      {% csrf_token %}
+      <label for="text">Text</label>
+      <textarea id="text" name="text" placeholder="Type or paste text here">{{ submitted_text|default:"" }}</textarea>
+
+      <label for="key">Key (number of rails)</label>
+      <input type="number" id="key" name="key" min="2" value="{{ submitted_key|default:3 }}">
+
+      <div class="btn-row">
+        <button type="submit" class="btn" name="action" value="encrypt">Encrypt</button>
+        <button type="submit" class="btn btn-secondary" name="action" value="decrypt">Decrypt</button>
+      </div>
+    </form>
+
+    {% if result is not None %}
+      <div class="output">
+        <div class="output-label">{{ result_label }}</div>
+        <div class="cipher-output">{{ result }}</div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

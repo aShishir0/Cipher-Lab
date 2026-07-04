@@ -1,0 +1,298 @@
+/* =========================================================
+   Cipher Lab — design tokens
+   Palette:
+     --ink        #12141C   background
+     --panel      #1B1E2B   card / surface
+     --panel-2    #232739   raised surface (inputs)
+     --hairline   #2E3244   borders
+     --paper      #E8E6E1   primary text
+     --muted      #9298AC   secondary text
+     --brass      #E3B23C   primary accent (cipher-dial amber)
+     --teal       #5FA98F   success / secondary accent
+     --rust       #C4634A   error accent
+   Type:
+     display/mono  'JetBrains Mono' — headings, hashes, cipher output
+     body          'Inter' — everything else
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --ink: #23272e;
+  --panel: #f7f7f7;
+  --panel-2: #e9e9ef;
+  --hairline: #d1d5db;
+  --paper: #23272e;
+  --muted: #6b7280;
+  --brass: #f4a259;
+  --teal: #4f9d69;
+  --rust: #e4572e;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background-color: var(--ink);
+  background-image: none;
+  color: var(--paper);
+  font-family: 'Inter', system-ui, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+h1, h2, h3, .mono, code, .hash, .cipher-output, th {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+
+a { color: var(--brass); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+/* ---------- Nav ---------- */
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--hairline);
+  background: rgba(18, 20, 28, 0.85);
+  backdrop-filter: blur(6px);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.nav-brand {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: var(--paper);
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-brand .dot { color: var(--brass); }
+
+.nav-links { display: flex; align-items: center; gap: 22px; font-size: 0.92rem; }
+.nav-links a { color: var(--muted); }
+.nav-links a:hover { color: var(--brass); text-decoration: none; }
+.nav-user { color: var(--paper); }
+.nav-links .btn-logout {
+  color: var(--rust);
+  border: 1px solid var(--rust);
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+.nav-links .btn-logout:hover { background: var(--rust); color: var(--ink); text-decoration: none; }
+
+/* ---------- Layout ---------- */
+.wrap {
+  flex: 1;
+  width: 100%;
+  max-width: 880px;
+  margin: 0 auto;
+  padding: 48px 24px 80px;
+}
+
+.wrap-narrow { max-width: 440px; }
+
+.eyebrow {
+  color: var(--brass);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+h1.page-title {
+  font-size: 1.9rem;
+  margin: 0 0 8px;
+  font-weight: 700;
+}
+
+.page-sub {
+  color: var(--muted);
+  margin-bottom: 32px;
+  line-height: 1.55;
+  max-width: 60ch;
+}
+
+/* ---------- Cards ---------- */
+.card {
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 32px;
+  margin-bottom: 28px;
+}
+
+.card h2 {
+  font-size: 1.05rem;
+  margin: 0 0 6px;
+  color: var(--paper);
+}
+
+.card .card-note {
+  color: var(--muted);
+  font-size: 0.88rem;
+  margin-bottom: 22px;
+  line-height: 1.5;
+}
+
+/* ---------- Forms ---------- */
+label {
+  display: block;
+  font-size: 0.82rem;
+  color: var(--muted);
+  margin-bottom: 6px;
+  font-family: 'JetBrains Mono', monospace;
+  letter-spacing: 0.03em;
+}
+
+input[type=text], input[type=password], input[type=number], select, textarea {
+  width: 100%;
+  background: var(--panel-2);
+  border: 1px solid var(--hairline);
+  color: var(--paper);
+  padding: 11px 13px;
+  border-radius: 6px;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  margin-bottom: 18px;
+  transition: border-color 0.15s ease;
+}
+
+textarea { font-family: 'JetBrains Mono', monospace; min-height: 90px; resize: vertical; }
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--brass);
+}
+
+.field-error { color: var(--rust); font-size: 0.82rem; margin: -12px 0 14px; }
+
+.btn {
+  display: inline-block;
+  background: var(--brass);
+  color: var(--ink);
+  border: none;
+  padding: 12px 22px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  transition: transform 0.1s ease, background 0.15s ease;
+}
+.btn:hover { background: #f0c257; }
+.btn:active { transform: translateY(1px); }
+
+.btn-secondary {
+  background: transparent;
+  color: var(--paper);
+  border: 1px solid var(--hairline);
+}
+.btn-secondary:hover { border-color: var(--brass); color: var(--brass); background: transparent; }
+
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 4px; }
+
+/* ---------- Output blocks ---------- */
+.output {
+  background: var(--panel-2);
+  border: 1px solid var(--hairline);
+  border-left: 3px solid var(--brass);
+  border-radius: 6px;
+  padding: 16px 18px;
+  margin-top: 18px;
+  word-break: break-all;
+  font-size: 0.92rem;
+}
+
+.output-label {
+  font-size: 0.75rem;
+  color: var(--brass);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 6px;
+}
+
+.key-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+@media (max-width: 560px) { .key-grid { grid-template-columns: 1fr; } }
+
+.key-box {
+  background: var(--panel-2);
+  border: 1px solid var(--hairline);
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+.key-box .k-label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px; }
+.key-box .k-value { font-family: 'JetBrains Mono', monospace; word-break: break-all; color: var(--teal); font-size: 0.88rem; }
+
+/* ---------- Messages ---------- */
+.messages { list-style: none; padding: 0; margin: 0 0 24px; }
+.messages li {
+  padding: 12px 16px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+  font-size: 0.9rem;
+  border: 1px solid var(--hairline);
+}
+.messages .success { border-color: var(--teal); color: var(--teal); }
+.messages .error { border-color: var(--rust); color: var(--rust); }
+.messages .warning { border-color: var(--brass); color: var(--brass); }
+.messages .info { color: var(--muted); }
+
+/* ---------- Dashboard tool grid ---------- */
+.tool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+  margin-top: 28px;
+}
+
+.tool-card {
+  background: var(--panel);
+  border: 1px solid var(--hairline);
+  border-radius: 10px;
+  padding: 26px;
+  display: block;
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.15s ease, transform 0.15s ease;
+}
+.tool-card:hover { border-color: var(--brass); transform: translateY(-2px); text-decoration: none; }
+.tool-card .t-index { font-family: 'JetBrains Mono', monospace; color: var(--brass); font-size: 0.8rem; margin-bottom: 14px; display: block; }
+.tool-card h3 { margin: 0 0 8px; font-size: 1.05rem; color: var(--paper); }
+.tool-card p { margin: 0; color: var(--muted); font-size: 0.87rem; line-height: 1.5; }
+
+/* ---------- Rail-fence signature strip ---------- */
+.rail-strip {
+  height: 46px;
+  margin: 0 0 30px;
+  overflow: hidden;
+}
+.rail-strip svg { display: block; width: 100%; height: 100%; }
+
+/* ---------- Auth split ---------- */
+.auth-links { margin-top: 22px; font-size: 0.88rem; color: var(--muted); text-align: center; }
+
+.footer-note {
+  text-align: center;
+  color: var(--muted);
+  font-size: 0.78rem;
+  padding: 20px;
+  border-top: 1px solid var(--hairline);
+}
+
+table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 0.85rem; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--hairline); }
+th { color: var(--muted); font-weight: 500; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.06em; }

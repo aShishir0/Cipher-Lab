@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}Cipher Lab{% endblock %}</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-brand"><span class="dot">&#9673;</span> CIPHER&nbsp;LAB</div>
+    <div class="nav-links">
+      {% if request.session.username %}
+        <a href="{% url 'ciphers:dashboard' %}">Dashboard</a>
+        <a href="{% url 'ciphers:rail_fence' %}">Rail Fence</a>
+        <a href="{% url 'ciphers:rsa' %}">RSA</a>
+        <span class="nav-user">{{ request.session.username }}</span>
+        <a href="{% url 'accounts:logout' %}" class="btn-logout">Log out</a>
+      {% else %}
+        <a href="{% url 'accounts:login' %}">Log in</a>
+        <a href="{% url 'accounts:register' %}">Register</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <div class="wrap {% block wrap_class %}{% endblock %}">
+    {% if messages %}
+      <ul class="messages">
+        {% for message in messages %}
+          <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% block content %}{% endblock %}
+  </div>
+
+
+</body>
+</html>

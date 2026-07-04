@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — Cipher Lab{% endblock %}
+
+{% block content %}
+  <div class="rail-strip">
+    <svg viewBox="0 0 700 46" preserveAspectRatio="none">
+      <polyline points="0,4 58,23 116,42 174,23 232,4 290,23 348,42 406,23 464,4 522,23 580,42 638,23 696,4"
+                fill="none" stroke="#2E3244" stroke-width="1.5"/>
+      <polyline points="0,4 58,23 116,42 174,23 232,4 290,23 348,42 406,23 464,4 522,23 580,42 638,23 696,4"
+                fill="none" stroke="#E3B23C" stroke-width="1.5" stroke-dasharray="6 340" stroke-dashoffset="0">
+        <animate attributeName="stroke-dashoffset" from="0" to="-1400" dur="7s" repeatCount="indefinite"/>
+      </polyline>
+    </svg>
+  </div>
+
+  <div class="eyebrow">Signed in as {{ username }}</div>
+  <h1 class="page-title">Cipher Lab</h1>
+  <p class="page-sub">Three classical and modern cryptographic techniques, implemented from scratch. Pick a tool below.</p>
+
+  <div class="tool-grid">
+    <a class="tool-card" href="{% url 'ciphers:rail_fence' %}">
+      <span class="t-index">01 / transposition</span>
+      <h3>Rail Fence Cipher</h3>
+      <p>Zig-zag your text across N rails to encrypt, or reverse the pattern to decrypt.</p>
+    </a>
+
+    <a class="tool-card" href="{% url 'ciphers:rsa' %}">
+      <span class="t-index">02 / public-key</span>
+      <h3>RSA Encryption</h3>
+      <p>Generate a public/private keypair, then encrypt and decrypt messages with real modular exponentiation.</p>
+    </a>
+
+    <a class="tool-card" href="{% url 'accounts:register' %}">
+      <span class="t-index">03 / integrity</span>
+      <h3>MD5 / SHA-256 Hashing</h3>
+      <p>Already in action on this account — registration and login hash and verify your password.</p>
+    </a>
+  </div>
+{% endblock %}

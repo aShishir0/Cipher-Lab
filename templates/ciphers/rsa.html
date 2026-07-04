@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+{% block title %}RSA Encryption — Cipher Lab{% endblock %}
+
+{% block content %}
+  <div class="eyebrow">Tool 02</div>
+  <h1 class="page-title">RSA Encryption</h1>
+  <p class="page-sub">Public-key encryption. Generate a fresh keypair, then use the public key to encrypt a message or the private key to decrypt one. Keys are kept in your session.</p>
+
+  <div class="card">
+    <h2>1 &middot; Keypair</h2>
+    <div class="card-note">We use small, random numbers here so you can see how RSA works. This is just for learning—don’t use it for real secrets!</div>
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn" name="action" value="generate">Generate new keypair</button>
+    </form>
+
+    {% if public_key %}
+      <div class="key-grid">
+        <div class="key-box">
+          <div class="k-label">Public key (e, n)</div>
+          <div class="k-value">({{ public_key.0 }}, {{ public_key.1 }})</div>
+        </div>
+        <div class="key-box">
+          <div class="k-label">Private key (d, n)</div>
+          <div class="k-value">({{ private_key.0 }}, {{ private_key.1 }})</div>
+        </div>
+        <div class="key-box">
+          <div class="k-label">Prime p</div>
+          <div class="k-value">{{ p }}</div>
+        </div>
+        <div class="key-box">
+          <div class="k-label">Prime q</div>
+          <div class="k-value">{{ q }}</div>
+        </div>
+      </div>
+    {% else %}
+      <p class="card-note" style="margin-top:16px;">You’ll need to generate a keypair above before you can encrypt or decrypt anything.</p>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>2 &middot; Encrypt</h2>
+    <div class="card-note">When you encrypt, each letter gets turned into a number using the public key above. Try it out!</div>
+    <form method="post">
+      {% csrf_token %}
+      <label for="plain_text">Plaintext</label>
+      <textarea id="plain_text" name="plain_text" placeholder="Message to encrypt">{{ submitted_plain_text|default:"" }}</textarea>
+      <button type="submit" class="btn" name="action" value="encrypt">Encrypt</button>
+    </form>
+
+    {% if cipher_result %}
+      <div class="output">
+        <div class="output-label">Ciphertext (comma-separated integers)</div>
+        <div class="cipher-output">{{ cipher_result }}</div>
+      </div>
+    {% endif %}
+  </div>
+
+  <div class="card">
+    <h2>3 &middot; Decrypt</h2>
+    <div class="card-note">To decrypt, use the private key above and paste the numbers you got from encryption. Easy!</div>
+    <form method="post">
+      {% csrf_token %}
+      <label for="cipher_text">Ciphertext</label>
+      <textarea id="cipher_text" name="cipher_text" placeholder="e.g. 1023, 5521, 87, ...">{{ submitted_cipher_text|default:"" }}</textarea>
+      <button type="submit" class="btn" name="action" value="decrypt">Decrypt</button>
+    </form>
+
+    {% if plain_result %}
+      <div class="output">
+        <div class="output-label">Recovered plaintext</div>
+        <div class="cipher-output">{{ plain_result }}</div>
+      </div>
+    {% endif %}
+  </div>
+{% endblock %}

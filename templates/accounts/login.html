@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block title %}Log in — Cipher Lab{% endblock %}
+{% block wrap_class %}wrap-narrow{% endblock %}
+
+{% block content %}
+  <div class="eyebrow">Access</div>
+  <h1 class="page-title">Log in</h1>
+  <p class="page-sub">The password is hashed on submit and compared against the stored hash.</p>
+
+  <div class="card">
+    <form method="post" novalidate>
+      {% csrf_token %}
+      <label for="{{ form.username.id_for_label }}">Username</label>
+      {{ form.username }}
+      {% for error in form.username.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+
+      <label for="{{ form.password.id_for_label }}">Password</label>
+      {{ form.password }}
+      {% for error in form.password.errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+
+      {% if form.non_field_errors %}
+        {% for error in form.non_field_errors %}<div class="field-error">{{ error }}</div>{% endfor %}
+      {% endif %}
+
+      <button type="submit" class="btn">Log in</button>
+    </form>
+  </div>
+
+  <div class="auth-links">No account yet? <a href="{% url 'accounts:register' %}">Register here</a></div>
+{% endblock %}
