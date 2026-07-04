@@ -7,7 +7,7 @@ services:
       pip install -r requirements.txt
       python manage.py collectstatic --noinput
     startCommand: gunicorn cipher_project.wsgi:application
-    releaseCommand: python manage.py migrate --noinput
+    preDeployCommand: python manage.py migrate --noinput
     envVars:
       - key: PYTHON_VERSION
         value: 3.13.0
